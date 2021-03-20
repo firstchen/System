@@ -32,6 +32,16 @@ $router->group(['namespace' => 'Sale'], function () use ($router) {
 
 });
 
+// 生产出货相关
+$router->group(['namespace' => 'Produce'], function () use ($router) {
+
+});
+
+// 采购相关
+$router->group(['namespace' => 'Purchase'], function () use ($router) {
+
+});
+
 // 产品相关
 $router->group(['namespace' => 'Product'], function () use ($router) {
 
