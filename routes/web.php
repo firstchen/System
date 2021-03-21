@@ -18,46 +18,46 @@ $router->get('/', function () use ($router) {
 });
 
 // 用户相关
-$router->group(['namespace' => 'User'], function () use ($router) {
+$router->group(['namespace' => 'User', 'prefix' => 'user'], function () use ($router) {
 
 });
 
 // 客户相关
-$router->group(['namespace' => 'Customer'], function () use ($router) {
+$router->group(['namespace' => 'Customer', 'prefix' => 'customer'], function () use ($router) {
 
 });
 
 // 销售相关
-$router->group(['namespace' => 'Sale'], function () use ($router) {
+$router->group(['namespace' => 'Sale', 'prefix' => 'sale'], function () use ($router) {
 
 });
 
 // 生产出货相关
-$router->group(['namespace' => 'Produce'], function () use ($router) {
+$router->group(['namespace' => 'Produce', 'prefix' => 'produce'], function () use ($router) {
 
 });
 
 // 采购相关
-$router->group(['namespace' => 'Purchase'], function () use ($router) {
+$router->group(['namespace' => 'Purchase', 'prefix' => 'purchase'], function () use ($router) {
 
 });
 
 // 产品相关
-$router->group(['namespace' => 'Product'], function () use ($router) {
-
+$router->group(['namespace' => 'Product', 'prefix' => 'product'], function () use ($router) {
+    $router->get('/index', 'ProductController@index');
 });
 
 // 财务相关
-$router->group(['namespace' => 'Finance'], function () use ($router) {
+$router->group(['namespace' => 'Finance', 'prefix' => 'finance'], function () use ($router) {
 
 });
 
 // 审批体系相关
-$router->group(['namespace' => 'Approve'], function () use ($router) {
+$router->group(['namespace' => 'Approve', 'prefix' => 'approve'], function () use ($router) {
 
 });
 
 // 渠道合作商相关
-$router->group(['namespace' => 'Channel'], function () use ($router) {
+$router->group(['namespace' => 'Channel', 'prefix' => 'channel'], function () use ($router) {
 
 });
