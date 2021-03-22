@@ -17,6 +17,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+// 认证相关
+$router->group(['namespace' => 'Authenticate', 'prefix' => 'authenticate'], function () use ($router) {
+    $router->post('/authenticate', 'AuthenticateController@authenticate');
+    $router->post('/login', 'AuthenticateController@login');
+});
+
 // 用户相关
 $router->group(['namespace' => 'User', 'prefix' => 'user'], function () use ($router) {
 
