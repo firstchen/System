@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Dotenv\Exception\ValidationException;
+use Illuminate\Validation\ValidationException;
 
 /**
  * AuthenticateController
@@ -25,7 +25,7 @@ class AuthenticateController extends Controller
      *
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response|null
      */
     public function authenticate(Request $request)
     {
