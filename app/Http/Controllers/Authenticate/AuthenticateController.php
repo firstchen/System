@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Authenticate;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -21,11 +21,11 @@ use Illuminate\Validation\ValidationException;
 class AuthenticateController extends Controller
 {
     /**
-     * Handle a authenticate request to the application.
-     *
+     * authenticate
+     * 认证
      * @param Request $request
-     *
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response|null
+     * @access public
+     * @return mixed
      */
     public function authenticate(Request $request)
     {
@@ -39,41 +39,42 @@ class AuthenticateController extends Controller
         }
 
         if (!$token = JWTAuth::attempt($request->only('email', 'password'))) {
-            return $this->onUnauthorized();
+            return $this->error(5000, Response::HTTP_UNAUTHORIZED);
         }
 
-        return $this->onAuthorized($token);
+        return $this->success(['token' => $token]);
+    }
+
+    public function register()
+    {
+
     }
 
     /**
-     * Get authenticated user.
-     *
-     * @return JsonResponse
+     * login
+     * 登录
+     * @access public
+     * @return mixed
      */
     public function login()
     {
-        return new JsonResponse(['message' => 'authenticated_user', 'data' => JWTAuth::parseToken()->authenticate(), Response::HTTP_OK]);
+        return $this->success(['info' => JWTAuth::parseToken()->authenticate()]);
     }
 
-    /**
-     * What response should be returned on authorized.
-     *
-     * @param string $token
-     *
-     * @return JsonResponse
-     */
-    protected function onAuthorized($token)
+    public function logout(Request $request)
     {
-        return new JsonResponse(['message' => 'Authorized', 'data' => ['token' => $token]], Response::HTTP_OK);
+        try {
+            $this->validate($request, [
+                'token' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            return $e->getResponse();
+        }
+
     }
 
-    /**
-     * What response should be returned on invalid credentials.
-     *
-     * @return JsonResponse
-     */
-    private function onUnauthorized()
+    public function refresh()
     {
-        return new JsonResponse(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+
     }
 }
