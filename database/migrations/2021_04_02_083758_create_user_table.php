@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -27,6 +28,8 @@ class CreateUserTable extends Migration
             $table->integer('create_ts')->default(0)->comment('创建时间');
             $table->integer('update_ts')->default(0)->comment('更新时间');
         });
+
+        DB::statement("ALTER TABLE `user` COMMENT '用户表'");
     }
 
     /**

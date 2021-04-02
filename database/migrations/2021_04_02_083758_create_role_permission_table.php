@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -21,6 +22,8 @@ class CreateRolePermissionTable extends Migration
             $table->integer('update_ts')->default(0)->comment('更新时间');
             $table->index(['role_id', 'permission_id'], 'rid_pid');
         });
+
+        DB::statement("ALTER TABLE `role_permission` COMMENT '角色权限关系表'");
     }
 
     /**
